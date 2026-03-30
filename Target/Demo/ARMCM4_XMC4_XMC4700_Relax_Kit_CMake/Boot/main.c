@@ -34,6 +34,7 @@
 #include "xmc_uart.h"                            /* UART driver header                 */
 #include "xmc_can.h"                             /* CAN driver header                  */
 #include "xmc_scu.h"                             /* System control unit driver         */
+#include "SEGGER_RTT.h"                          /* Segger real-time transfer          */
 #include "shared_params.h"                       /* Shared parameters header           */
 
 
@@ -140,9 +141,6 @@ static void Init(void)
     .fccu_clkdiv = 1U,
     .fperipheral_clkdiv = 1U
   };
-#if (BOOT_FILE_LOGGING_ENABLE > 0) && (BOOT_COM_RS232_ENABLE == 0)
-  XMC_UART_CH_CONFIG_t rs232_config;
-#endif
 
   /* initialize the SCU clock */
   XMC_SCU_CLOCK_Init(&clock_config);
@@ -165,26 +163,17 @@ static void Init(void)
   XMC_GPIO_SetMode(P15_13, XMC_GPIO_MODE_INPUT_TRISTATE);
   XMC_GPIO_EnableDigitalInput(P15_13);
 
-#if (BOOT_FILE_LOGGING_ENABLE > 0) && (BOOT_COM_RS232_ENABLE == 0)
-  /* set configuration and initialize UART channel */
-  rs232_config.baudrate = BOOT_COM_RS232_BAUDRATE;
-  rs232_config.data_bits = 8;
-  rs232_config.frame_length = 8;
-  rs232_config.stop_bits = 1;
-  rs232_config.oversampling = 16;
-  rs232_config.parity_mode = XMC_USIC_CH_PARITY_MODE_NONE;
-  XMC_UART_CH_Init(XMC_UART0_CH0, &rs232_config);
-  /* configure small transmit and receive FIFO */
-  XMC_USIC_CH_TXFIFO_Configure(XMC_UART0_CH0, 16U, XMC_USIC_CH_FIFO_SIZE_16WORDS, 1U);
-  XMC_USIC_CH_RXFIFO_Configure(XMC_UART0_CH0,  0U, XMC_USIC_CH_FIFO_SIZE_16WORDS, 1U);
-  /* start UART */
-  XMC_UART_CH_Start(XMC_UART0_CH0);
-#endif
 #if (BOOT_COM_USB_ENABLE > 0)
   /* enable USB power */
   XMC_SCU_RESET_DeassertPeripheralReset(XMC_SCU_PERIPHERAL_RESET_USB0);
   XMC_SCU_POWER_EnableUsb();
 #endif
+  /* Configure UP-buffer 0 to not block when data written to it does not fit. Discard the
+   * data that does not fit. Make sure to never use SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL
+   * here, because then the system hangs if the buffer is full. This can happen when no
+   * RTT terminal is attached through the debugger, to read out the data.
+   */
+  SEGGER_RTT_ConfigUpBuffer(0, NULL, NULL, 0, SEGGER_RTT_MODE_NO_BLOCK_TRIM);
 } /*** end of Init ***/
 
 
@@ -196,7 +185,7 @@ static void Init(void)
 ****************************************************************************************/
 static void PostInit(void)
 {
-#if (BOOT_COM_RS232_ENABLE > 0) || (BOOT_FILE_LOGGING_ENABLE > 0)
+#if (BOOT_COM_RS232_ENABLE > 0)
   XMC_GPIO_CONFIG_t rx_rs232_config;
   XMC_GPIO_CONFIG_t tx_rs232_config;
 #endif
@@ -205,7 +194,7 @@ static void PostInit(void)
   XMC_GPIO_CONFIG_t tx_can_config;
 #endif
 
-#if (BOOT_COM_RS232_ENABLE > 0) || (BOOT_FILE_LOGGING_ENABLE > 0)
+#if (BOOT_COM_RS232_ENABLE > 0)
   /* initialize UART Rx pin */
   rx_rs232_config.mode = XMC_GPIO_MODE_INPUT_TRISTATE;
   rx_rs232_config.output_level = XMC_GPIO_OUTPUT_LEVEL_HIGH;

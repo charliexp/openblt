@@ -16,6 +16,7 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../../../Source openblt)
 # Include other third party components.
 include("${CMAKE_SOURCE_DIR}/.cmake/Cmsis.cmake")
 include("${CMAKE_SOURCE_DIR}/.cmake/XmcLib.cmake")
+include("${CMAKE_SOURCE_DIR}/.cmake/SeggerRTT.cmake")
 
 # Configure project include directories.
 set(PROJECT_INCLUDES
@@ -49,6 +50,7 @@ set(PROJECT_SOURCES
 set(PROJECT_LIBRARIES
     infineon-xmc4-cmsis
     infineon-xmc-lib
+    segger_rtt
     openblt-core 
     openblt-armcm4-xmc4 
     openblt-armcm4-xmc4-gcc 
