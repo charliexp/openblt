@@ -238,6 +238,7 @@
                     <state>USE_FULL_LL_DRIVER</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>STM32F103xB</state>
+                    <state>PRINTF_INCLUDE_CONFIG_H</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -298,7 +299,7 @@
                 <option>
                     <name>CCAllowList</name>
                     <version>1</version>
-                    <state>10010100</state>
+                    <state>11111110</state>
                 </option>
                 <option>
                     <name>CCDebugInfo</name>
@@ -366,6 +367,7 @@
                     <state>$PROJ_DIR$\..\lib\STM32F1xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\lib\STM32F1xx_HAL_Driver\Inc\Legacy</state>
                     <state>$PROJ_DIR$\..\lib\TinyUSB</state>
+                    <state>$PROJ_DIR$\..\lib\printf</state>
                     <state>$PROJ_DIR$\..\..\..\..\Source</state>
                     <state>$PROJ_DIR$\..\..\..\..\Source\ARMCM3_STM32F1</state>
                     <state>$PROJ_DIR$\..\..\..\..\Source\third_party\fatfs\source</state>
@@ -385,7 +387,7 @@
                 </option>
                 <option>
                     <name>CCOptLevel</name>
-                    <state>2</state>
+                    <state>3</state>
                 </option>
                 <option>
                     <name>CCOptStrategy</name>
@@ -394,7 +396,7 @@
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
-                    <state>2</state>
+                    <state>3</state>
                 </option>
                 <option>
                     <name>CCPosIndRopi</name>
@@ -1030,7 +1032,7 @@
                 </option>
                 <option>
                     <name>IlinkTrustzoneImportLibraryOut</name>
-                    <state>###Unitialized###</state>
+                    <state>stm32f103_import_lib.o</state>
                 </option>
                 <option>
                     <name>OILinkExtraOption</name>
@@ -2435,6 +2437,18 @@
                 </file>
             </group>
             <group>
+                <name>printf</name>
+                <file>
+                    <name>$PROJ_DIR$\..\lib\printf\printf.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\lib\printf\printf.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\lib\printf\printf_config.h</name>
+                </file>
+            </group>
+            <group>
                 <name>tinyusb</name>
                 <file>
                     <name>$PROJ_DIR$\..\lib\TinyUSB\tusb_config.h</name>
@@ -2652,10 +2666,22 @@
             <name>$PROJ_DIR$\..\..\..\..\Source\cpu.h</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\events.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\events.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\..\..\Source\file.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\..\Source\file.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\infotable.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\infotable.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\..\Source\mb.c</name>

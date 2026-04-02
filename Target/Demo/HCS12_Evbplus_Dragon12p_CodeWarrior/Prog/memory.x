@@ -14,7 +14,7 @@ SEGMENTS  /* Here all RAM/ROM areas of the device are listed. Used in PLACEMENT 
 
 /* non-paged FLASHs */
       ROM_4000      = READ_ONLY     0x4000 TO   0x7FFF;
-      ROM_C000      = READ_ONLY     0xC000 TO   0xE7FF; /* last part reserved for OpenBLT */
+      ROM_C000      = READ_ONLY     0xC000 TO   0xDFFF; /* last part reserved for OpenBLT */
 
 /* paged FLASH:                     0x8000 TO   0xBFFF; addressed through PPAGE */
       PAGE_30       = READ_ONLY   0x308000 TO 0x30BFFF;

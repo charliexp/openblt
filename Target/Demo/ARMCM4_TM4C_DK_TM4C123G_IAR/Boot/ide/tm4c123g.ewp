@@ -235,6 +235,7 @@
                     <state>PART_TM4C123GH6PGE</state>
                     <state>TM4C123GH6PGE</state>
                     <state>TARGET_IS_BLIZZARD_RA1</state>
+                    <state>PRINTF_INCLUDE_CONFIG_H</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -365,6 +366,7 @@
                     <state>$PROJ_DIR$\..\lib\inc</state>
                     <state>$PROJ_DIR$\..\lib\driverlib</state>
                     <state>$PROJ_DIR$\..\lib\fatfs</state>
+                    <state>$PROJ_DIR$\..\lib\printf</state>
                     <state>$PROJ_DIR$\..\lib\cmsis\Include</state>
                     <state>$PROJ_DIR$\..\lib\cmsis\Device\TI\TM4C123</state>
                     <state>$PROJ_DIR$\..\lib\tinyusb</state>
@@ -1348,6 +1350,18 @@
                 </file>
             </group>
             <group>
+                <name>printf</name>
+                <file>
+                    <name>$PROJ_DIR$\..\lib\printf\printf.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\lib\printf\printf.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\lib\printf\printf_config.h</name>
+                </file>
+            </group>
+            <group>
                 <name>inc</name>
                 <file>
                     <name>$PROJ_DIR$\..\lib\inc\asmdefs.h</name>
@@ -1634,10 +1648,22 @@
             <name>$PROJ_DIR$\..\..\..\..\Source\cpu.h</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\events.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\events.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\..\..\Source\file.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\..\Source\file.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\infotable.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\infotable.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\..\Source\mb.c</name>

@@ -234,6 +234,7 @@
                     <state>USE_HAL_DRIVER</state>
                     <state>USE_FULL_LL_DRIVER</state>
                     <state>STM32F207xx</state>
+                    <state>PRINTF_INCLUDE_CONFIG_H</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -359,6 +360,7 @@
                     <state>$PROJ_DIR$\..\lib\CMSIS\Device\ST\STM32F2xx\Include</state>
                     <state>$PROJ_DIR$\..\lib\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\lib\fatfs</state>
+                    <state>$PROJ_DIR$\..\lib\printf</state>
                     <state>$PROJ_DIR$\..\lib\STM32F2xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\lib\STM32F2xx_HAL_Driver\Inc\Legacy</state>
                     <state>$PROJ_DIR$\..\..\..\..\Source</state>
@@ -2426,6 +2428,18 @@
                     <name>$PROJ_DIR$\..\lib\STM32F2xx_HAL_Driver\Inc\stm32f2xx_ll_utils.h</name>
                 </file>
             </group>
+            <group>
+                <name>printf</name>
+                <file>
+                    <name>$PROJ_DIR$\..\lib\printf\printf.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\lib\printf\printf.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\lib\printf\printf_config.h</name>
+                </file>
+            </group>
             <file>
                 <name>$PROJ_DIR$\..\lib\stm32f2xx_hal_conf.h</name>
             </file>
@@ -2548,10 +2562,22 @@
             <name>$PROJ_DIR$\..\..\..\..\Source\cpu.h</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\events.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\events.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\..\..\Source\file.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\..\Source\file.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\infotable.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\infotable.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\..\Source\mb.c</name>

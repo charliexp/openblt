@@ -41,7 +41,7 @@
  *  \attention This value must be updated if the memory reserved for the bootloader
  *             changes.
  */
-#define VCT_USER_PROGRAM_VECTOR_TABLE_STARTADDR  (0xE780)
+#define VCT_USER_PROGRAM_VECTOR_TABLE_STARTADDR  (0xDF80)
 /** \brief INITRM register definition. */
 #define REG_INITRM      (*(volatile blt_int8u *) 0x0010)
 /** \brief INITRG register definition. */

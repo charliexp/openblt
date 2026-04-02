@@ -93,33 +93,9 @@
  * to 1. This enables support for firmware updates from a file stored on a locally
  * attached file system such as an SD-card. Note that this interface can be enabled
  * together with one of the remote communication interfaces such as UART, CAN or USB.
- *
- * Set BOOT_FILE_LOGGING_ENABLE to 1 if you would like log messages to be created during
- * a firmware update. The hook function FileFirmwareUpdateLogHook() will be called each
- * time a new string formatted log entry is available. This could be used during testing
- * by outputting the string on UART or to create a log file on the file system itself.
- *
- * Set BOOT_FILE_ERROR_HOOK_ENABLE to 1 if you would like to be informed in case an error
- * occurs during the firmware update. This could for example be used to turn on an error
- * LED to inform the user that something went wrong. Inspecting the log messages provides
- * additional information on the error cause.
- *
- * Set BOOT_FILE_STARTED_HOOK_ENABLE to 1 if you would like to be informed when a new
- * firmware update is started by the bootloader.
- *
- * Set BOOT_FILE_COMPLETED_HOOK_ENABLE to 1 if you would like to be informed when a
- * firmware update is completed by the bootloader.
  */
 /** \brief Enable/disable support for firmware updates from a locally attached storage.*/
 #define BOOT_FILE_SYS_ENABLE            (1)
-/** \brief Enable/disable logging messages during firmware updates. */
-#define BOOT_FILE_LOGGING_ENABLE        (1)
-/** \brief Enable/disable a hook function that is called upon detection of an error. */
-#define BOOT_FILE_ERROR_HOOK_ENABLE     (1)
-/** \brief Enable/disable a hook function that is called at the start of the update. */
-#define BOOT_FILE_STARTED_HOOK_ENABLE   (1)
-/** \brief Enable/disable a hook function that is called at the end of the update. */
-#define BOOT_FILE_COMPLETED_HOOK_ENABLE (1)
 
 
 /****************************************************************************************
@@ -184,6 +160,20 @@
  */
 /** \brief Enable/disable the hook functions for controlling the watchdog. */
 #define BOOT_COP_HOOKS_ENABLE           (1)
+
+
+/****************************************************************************************
+*   E V E N T S   M O D U L E   C O N F I G U R A T I O N
+****************************************************************************************/
+/* The events module emits firmware update related events, making it possible for you
+ * to track the progress of a firmware update. Ideal for updating a user interface or
+ * for logging purposes. 
+ * To enable the events module, set BOOT_EVENTS_ENABLE to a value of 1. This causes the
+ * bootloader to call the EventsHook() hook-function whenever an firmware update related
+ * event occurs.
+ */
+/** \brief Enable/disable the events module. */
+#define BOOT_EVENTS_ENABLE              (1)
 
 
 /****************************************************************************************

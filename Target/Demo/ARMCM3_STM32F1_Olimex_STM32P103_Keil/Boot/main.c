@@ -147,9 +147,6 @@ static void SystemClock_Config(void)
 void HAL_MspInit(void)
 {
   LL_GPIO_InitTypeDef GPIO_InitStruct;
-#if (BOOT_FILE_LOGGING_ENABLE > 0) && (BOOT_COM_RS232_ENABLE == 0)
-  LL_USART_InitTypeDef USART_InitStruct;
-#endif
 
   /* AFIO and PWR clock enable. */
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_AFIO);
@@ -160,7 +157,7 @@ void HAL_MspInit(void)
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOB);
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOC);
 
-#if (BOOT_COM_RS232_ENABLE > 0) || (BOOT_FILE_LOGGING_ENABLE > 0)
+#if (BOOT_COM_RS232_ENABLE > 0)
   /* UART clock enable. */
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_USART2);
 #endif
@@ -183,7 +180,7 @@ void HAL_MspInit(void)
   GPIO_InitStruct.Mode = LL_GPIO_MODE_FLOATING;
   LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-#if (BOOT_COM_RS232_ENABLE > 0) || (BOOT_FILE_LOGGING_ENABLE > 0)
+#if (BOOT_COM_RS232_ENABLE > 0)
   /* UART TX and RX GPIO pin configuration. */
   GPIO_InitStruct.Pin = LL_GPIO_PIN_2;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
@@ -193,19 +190,6 @@ void HAL_MspInit(void)
   GPIO_InitStruct.Pin = LL_GPIO_PIN_3;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_FLOATING;
   LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-  #if (BOOT_FILE_LOGGING_ENABLE > 0) && (BOOT_COM_RS232_ENABLE == 0)
-  /* configure UART peripheral */
-  USART_InitStruct.BaudRate = BOOT_COM_RS232_BAUDRATE;
-  USART_InitStruct.DataWidth = LL_USART_DATAWIDTH_8B;
-  USART_InitStruct.StopBits = LL_USART_STOPBITS_1;
-  USART_InitStruct.Parity = LL_USART_PARITY_NONE;
-  USART_InitStruct.TransferDirection = LL_USART_DIRECTION_TX_RX;
-  USART_InitStruct.HardwareFlowControl = LL_USART_HWCONTROL_NONE;
-  /* initialize the UART peripheral */
-  LL_USART_Init(USART2, &USART_InitStruct);
-  LL_USART_ConfigAsyncMode(USART2);
-  LL_USART_Enable(USART2);
-  #endif
 #endif
 
 #if (BOOT_COM_CAN_ENABLE > 0)
@@ -246,11 +230,7 @@ void HAL_MspDeInit(void)
   LL_APB1_GRP1_DisableClock(LL_APB1_GRP1_PERIPH_CAN1);
 #endif
 
-#if (BOOT_COM_RS232_ENABLE > 0) || (BOOT_FILE_LOGGING_ENABLE > 0)
-  #if (BOOT_FILE_LOGGING_ENABLE > 0) && (BOOT_COM_RS232_ENABLE == 0)
-  /* Disable UART peripheral */
-  LL_USART_Disable(USART2);
-  #endif
+#if (BOOT_COM_RS232_ENABLE > 0)
   /* UART clock disable. */
   LL_APB1_GRP1_DisableClock(LL_APB1_GRP1_PERIPH_USART2);
 #endif

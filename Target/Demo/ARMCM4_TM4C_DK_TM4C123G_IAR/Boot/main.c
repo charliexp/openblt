@@ -39,9 +39,7 @@
 #include "inc/hw_types.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/gpio.h"
-#if (BOOT_FILE_LOGGING_ENABLE > 0)
-#include "driverlib/uartlib.h"
-#endif
+
 
 /****************************************************************************************
 * Function prototypes
@@ -86,22 +84,9 @@ static void Init(void)
   GPIOPinTypeGPIOOutput(GPIO_PORTG_BASE, GPIO_PIN_2);
   GPIOPinWrite(GPIO_PORTG_BASE, GPIO_PIN_2, 0);
 #if (BOOT_COM_RS232_ENABLE > 0)
-  #if (BOOT_COM_RS232_CHANNEL_INDEX == 0)
   /* enable and configure UART0 related peripherals and pins */
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
   GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
-  #endif
-#elif (BOOT_FILE_LOGGING_ENABLE > 0)
-  /* log info strings to UART during firmware updates from local file storage */
-  /* enable and configure UART0 related peripherals and pins */
-  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-  GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
-  /* enable the UART0 peripheral */
-  SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
-  /* configure the UART0 baudrate and communication parameters */
-  UARTConfigSetExpClk(UART0_BASE, SysCtlClockGet(), 57600,
-                      (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | 
-                      UART_CONFIG_PAR_NONE));
 #endif
 #if (BOOT_COM_USB_ENABLE > 0)
   /* enable the GPIO peripheral used for USB, and configure the USB pins */

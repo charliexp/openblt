@@ -82,7 +82,7 @@ __interrupt void UnusedISR(void)
  */
 const tIsrFunc _vectab[] @0xff80 =
 #else
-const tIsrFunc _vectab[] @0xe77e =
+const tIsrFunc _vectab[] @0xdf7e =
 #endif 
 {
 #if (BDM_DEBUGGING_ENABLED != 1)

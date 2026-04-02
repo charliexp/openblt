@@ -62,7 +62,7 @@
                 </option>
                 <option>
                     <name>RTDescription</name>
-                    <state>Use the normal configuration of the C/C++ runtime library. No locale interface, C locale, no file descriptor support, no multibytes in printf and scanf, and no hex floats in strtod.</state>
+                    <state>A compact configuration of the C/C++14 runtime library. No locale interface, C locale, no file descriptor support, no multibytes in printf and scanf, and no hex floats in strtod.</state>
                 </option>
                 <option>
                     <name>OGProductVersion</name>
@@ -298,7 +298,7 @@
                 <option>
                     <name>CCAllowList</name>
                     <version>1</version>
-                    <state>11111110</state>
+                    <state>10010100</state>
                 </option>
                 <option>
                     <name>CCDebugInfo</name>
@@ -382,7 +382,7 @@
                 </option>
                 <option>
                     <name>CCOptLevel</name>
-                    <state>3</state>
+                    <state>2</state>
                 </option>
                 <option>
                     <name>CCOptStrategy</name>
@@ -391,7 +391,7 @@
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
-                    <state>3</state>
+                    <state>2</state>
                 </option>
                 <option>
                     <name>CCPosIndRopi</name>
@@ -2514,10 +2514,22 @@
             <name>$PROJ_DIR$\..\..\..\..\Source\cpu.h</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\events.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\events.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\..\..\Source\file.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\..\Source\file.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\infotable.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Source\infotable.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\..\Source\mb.c</name>

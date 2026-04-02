@@ -372,7 +372,7 @@ void EventsHook(tEventsId id, void const *info)
       base_addr = ((tEventsInfoWrite const *)info)->base_addr;
       num_bytes = ((tEventsInfoWrite const *)info)->num_bytes;
       progress  = ((tEventsInfoWrite const *)info)->progress;
-      SEGGER_RTT_printf(0, "Programming %3u bytes at %08Xh [%3u%%]\n",
+      SEGGER_RTT_printf(0, "Programming %3u bytes at %08Xh [%3u%%].\n",
                         num_bytes, base_addr, progress);
       break;
 

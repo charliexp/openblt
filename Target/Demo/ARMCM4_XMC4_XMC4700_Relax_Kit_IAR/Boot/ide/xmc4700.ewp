@@ -233,6 +233,7 @@
                     <name>CCDefines</name>
                     <state>XMC4700_F144x2048</state>
                     <state>XMC_ETH_PHY_KSZ8081RNB</state>
+                    <state>PRINTF_INCLUDE_CONFIG_H</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -361,6 +362,7 @@
                     <state>$PROJ_DIR$\..\lib\FatFS</state>
                     <state>$PROJ_DIR$\..\lib\FatFS\SDMMC_BLOCK</state>
                     <state>$PROJ_DIR$\..\lib\TinyUSB</state>
+                    <state>$PROJ_DIR$\..\lib\printf</state>
                     <state>$PROJ_DIR$\..\..\..\..\Source</state>
                     <state>$PROJ_DIR$\..\..\..\..\Source\ARMCM4_XMC4</state>
                     <state>$PROJ_DIR$\..\..\..\..\Source\ARMCM4_XMC4\IAR</state>
@@ -2296,6 +2298,18 @@
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\lib\FatFS\SDMMC_BLOCK\sdmmc_block_private_sd.h</name>
+                </file>
+            </group>
+            <group>
+                <name>printf</name>
+                <file>
+                    <name>$PROJ_DIR$\..\lib\printf\printf.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\lib\printf\printf.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\lib\printf\printf_config.h</name>
                 </file>
             </group>
             <group>

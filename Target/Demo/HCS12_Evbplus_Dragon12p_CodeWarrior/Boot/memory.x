@@ -4,7 +4,7 @@ SEGMENTS  /* Here all RAM/ROM areas of the device are listed. Used in PLACEMENT 
       /* RAM */
       RAM           = READ_WRITE    0x3800 TO   0x3FFF;
       /* non-paged FLASHs */
-      ROM_C000      = READ_ONLY     0xe800 TO   0xFEDF;
+      ROM_C000      = READ_ONLY     0xe000 TO   0xFEDF;
 END
 
 PLACEMENT /* here all predefined and user segments are placed into the SEGMENTS defined above. */

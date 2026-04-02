@@ -125,7 +125,7 @@ STDFLAGS   += -fdata-sections -ffunction-sections -Wall -g -Wno-strict-aliasing
 OPTFLAGS    = -Os
 DEPFLAGS  = -MT $@ -MMD -MP -MF $(OBJ_PATH)/$*.d
 CFLAGS      = $(STDFLAGS) $(OPTFLAGS)
-CFLAGS     += -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB
+CFLAGS     += -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB -DPRINTF_INCLUDE_CONFIG_H
 CFLAGS     += -D__weak="__attribute__((weak))" -D__packed="__attribute__((__packed__))"
 CFLAGS     += $(INC_PATH)
 AFLAGS      = $(CFLAGS)

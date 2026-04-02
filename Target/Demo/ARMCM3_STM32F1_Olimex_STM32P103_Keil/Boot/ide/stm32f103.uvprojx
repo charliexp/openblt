@@ -337,9 +337,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_FULL_LL_DRIVER,USE_HAL_DRIVER,STM32F103xB,reset_handler=Reset_Handler</Define>
+              <Define>USE_FULL_LL_DRIVER,USE_HAL_DRIVER,STM32F103xB,reset_handler=Reset_Handler,PRINTF_INCLUDE_CONFIG_H</Define>
               <Undefine></Undefine>
-              <IncludePath>..\lib;..\lib\fatfs;..\lib\CMSIS\Include;..\lib\CMSIS\Device\ST\STM32F1xx\Include;..\lib\STM32F1xx_HAL_Driver\Inc;..\lib\STM32F1xx_HAL_Driver\Inc\Legacy;..\..\..\..\Source;..\..\..\..\Source\ARMCM3_STM32F1;..\..\..\..\Source\ARMCM3_STM32F1\Keil;..\..\..\..\Source\third_party\fatfs\source;..\..\Boot</IncludePath>
+              <IncludePath>..\lib;..\lib\fatfs;..\lib\printf;..\lib\CMSIS\Include;..\lib\CMSIS\Device\ST\STM32F1xx\Include;..\lib\STM32F1xx_HAL_Driver\Inc;..\lib\STM32F1xx_HAL_Driver\Inc\Legacy;..\..\..\..\Source;..\..\..\..\Source\ARMCM3_STM32F1;..\..\..\..\Source\ARMCM3_STM32F1\Keil;..\..\..\..\Source\third_party\fatfs\source;..\..\Boot</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -668,6 +668,21 @@
               <FileType>1</FileType>
               <FilePath>..\lib\system_stm32f1xx.c</FilePath>
             </File>
+            <File>
+              <FileName>printf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lib\printf\printf.c</FilePath>
+            </File>
+            <File>
+              <FileName>printf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\lib\printf\printf.h</FilePath>
+            </File>
+            <File>
+              <FileName>printf_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\lib\printf\printf_config.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -897,6 +912,26 @@
               <FileName>ffunicode.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Source\third_party\fatfs\source\ffunicode.c</FilePath>
+            </File>
+            <File>
+              <FileName>events.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Source\events.c</FilePath>
+            </File>
+            <File>
+              <FileName>events.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\Source\events.h</FilePath>
+            </File>
+            <File>
+              <FileName>infotable.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Source\infotable.c</FilePath>
+            </File>
+            <File>
+              <FileName>infotable.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\Source\infotable.h</FilePath>
             </File>
           </Files>
         </Group>

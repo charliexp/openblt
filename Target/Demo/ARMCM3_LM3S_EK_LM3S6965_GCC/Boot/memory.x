@@ -42,7 +42,8 @@ SECTIONS
      		*(SORT(.dtors.*))
      		*(.dtors)
 
-		    *(.rodata*)
+     		*(.rodata*)
+     		*(.ARM.exidx*)        
 
 		    KEEP(*(.eh_frame*))
         _etext = .;

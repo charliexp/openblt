@@ -939,6 +939,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Source\ARMCM0_STM32C0\Keil\cpu_comp.c</FilePath>
             </File>
+            <File>
+              <FileName>events.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Source\events.c</FilePath>
+            </File>
+            <File>
+              <FileName>events.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\Source\events.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

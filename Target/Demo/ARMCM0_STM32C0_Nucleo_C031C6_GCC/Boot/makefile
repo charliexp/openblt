@@ -103,7 +103,7 @@ LIB_PATH  =
 #|--------------------------------------------------------------------------------------|
 STDFLAGS    = -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -fno-strict-aliasing
 STDFLAGS   += -fdata-sections -ffunction-sections -Wall -g3
-OPTFLAGS    = -Og
+OPTFLAGS    = -Os
 DEPFLAGS    = -MT $@ -MMD -MP -MF $(OBJ_PATH)/$*.d
 CFLAGS      = $(STDFLAGS) $(OPTFLAGS)
 CFLAGS     += -DSTM32C031xx -DUSE_HAL_DRIVER -DUSE_FULL_LL_DRIVER

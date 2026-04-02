@@ -14,7 +14,7 @@ SEGMENTS  /* Here all RAM/ROM areas of the device are listed. Used in PLACEMENT 
 
 /* non-paged FLASHs */
       ROM_4000      = READ_ONLY     0x4000 TO   0x7FFF;
-      ROM_C000      = READ_ONLY     0xC000 TO   0xE6FF;
+      ROM_C000      = READ_ONLY     0xC000 TO   0xDEFF;
 
 /* paged FLASH:                     0x8000 TO   0xBFFF; addressed through PPAGE */
       PAGE_08       = READ_ONLY   0x088000 TO 0x08BFFF;
@@ -24,7 +24,7 @@ SEGMENTS  /* Here all RAM/ROM areas of the device are listed. Used in PLACEMENT 
       PAGE_0C       = READ_ONLY   0x0C8000 TO 0x0CBFFF;
 /*    PAGE_0D       = READ_ONLY   0x0D8000 TO 0x0DBFFF; not used: equivalent to ROM_4000 */
       PAGE_0E       = READ_ONLY   0x0E8000 TO 0x0EBFFF;
-      PAGE_0F       = READ_ONLY   0x0F8000 TO 0x0FA6FF; /* equivalent to ROM_C000. last part reserved for vector table and OpenBLT */
+      PAGE_0F       = READ_ONLY   0x0F8000 TO 0x0F9EFF; /* equivalent to ROM_C000. last part reserved for vector table and OpenBLT */
 END
 
 PLACEMENT /* here all predefined and user segments are placed into the SEGMENTS defined above. */

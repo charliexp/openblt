@@ -1400,6 +1400,12 @@
                 <name>$PROJ_DIR$\..\..\..\..\Source\ARMCM0_STM32F0\IAR\cpu_comp.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\..\..\..\Source\events.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\Source\events.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\..\..\..\Source\file.c</name>
             </file>
             <file>
@@ -1410,6 +1416,12 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\Source\ARMCM0_STM32F0\flash.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\Source\infotable.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\Source\infotable.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\Source\mb.c</name>

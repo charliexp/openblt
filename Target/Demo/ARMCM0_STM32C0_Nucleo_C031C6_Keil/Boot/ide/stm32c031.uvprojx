@@ -313,7 +313,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>2</Optim>
+            <Optim>6</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -852,6 +852,26 @@
               <FileName>mbrtu.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Source\ARMCM0_STM32C0\mbrtu.c</FilePath>
+            </File>
+            <File>
+              <FileName>events.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Source\events.c</FilePath>
+            </File>
+            <File>
+              <FileName>events.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\Source\events.h</FilePath>
+            </File>
+            <File>
+              <FileName>infotable.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Source\infotable.c</FilePath>
+            </File>
+            <File>
+              <FileName>infotable.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\Source\infotable.h</FilePath>
             </File>
           </Files>
         </Group>

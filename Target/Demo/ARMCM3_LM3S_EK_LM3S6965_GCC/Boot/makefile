@@ -129,10 +129,10 @@ LIB_PATH  =
 STDFLAGS    = -mcpu=cortex-m3 -mthumb -mfloat-abi=soft -fno-strict-aliasing
 STDFLAGS   += -Wno-unused-but-set-variable -Wno-maybe-uninitialized
 STDFLAGS   += -fdata-sections -ffunction-sections -Wall -g3
-OPTFLAGS    = -O2
+OPTFLAGS    = -Os
 DEPFLAGS    = -MT $@ -MMD -MP -MF $(OBJ_PATH)/$*.d
 CFLAGS      = $(STDFLAGS) $(OPTFLAGS)
-CFLAGS     += -DDEBUG -Dgcc
+CFLAGS     += -DDEBUG -Dgcc -DPRINTF_INCLUDE_CONFIG_H
 CFLAGS     += $(INC_PATH)
 AFLAGS      = $(CFLAGS)
 LFLAGS      = $(STDFLAGS) $(OPTFLAGS)

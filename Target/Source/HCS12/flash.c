@@ -252,7 +252,7 @@ static const tFlashSector flashLayout[] =
   { 0xFC800, 0x0800 },                  /* flash page 0x3F - 2kb                       */
   { 0xFD000, 0x0800 },                  /* flash page 0x3F - 2kb                       */
   { 0xFD800, 0x0800 },                  /* flash page 0x3F - 2kb                       */
-  { 0xFE000, 0x0800 },                  /* flash page 0x3F - 2kb                       */
+  /* { 0xFE000, 0x0800 },                  flash page 0x3F - reserved for bootloader   */
   /* { 0xFE800, 0x0800 },                  flash page 0x3F - reserved for bootloader   */
   /* { 0xFF000, 0x0800 },                  flash page 0x3F - reserved for bootloader   */
   /* { 0xFF800, 0x0800 },                  flash page 0x3F - reserved for bootloader   */

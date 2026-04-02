@@ -40,7 +40,7 @@
  *  \attention This value must be updated if the memory reserved for the bootloader
  *             changes.
  */
-#define VCT_USER_PROGRAM_VECTOR_TABLE_STARTADDR  (0xE780)
+#define VCT_USER_PROGRAM_VECTOR_TABLE_STARTADDR  (0xDF80)
 
 
 /****************************************************************************************

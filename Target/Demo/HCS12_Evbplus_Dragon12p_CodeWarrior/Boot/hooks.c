@@ -237,6 +237,117 @@ blt_bool NvmWriteChecksumHook(void)
 
 
 /****************************************************************************************
+*   E V E N T S   M O D U L E   H O O K   F U N C T I O N S
+****************************************************************************************/
+
+#if (BOOT_EVENTS_ENABLE > 0)
+/***********************************************************************************//**
+** \brief     Callback that gets called when a firmware update related event gets
+**            triggered. Implement your event handling here. For example for updating
+**            a user interface or for logging purposes.
+**            Cast the opaque info pointer to the correct structure type (tEventsInfoXxx)
+**            to access additional event related information.
+** \param     id The identifier of the event that occurred.
+** \param     info Opaque pointer to event identifier related information. Can be 
+**            BLT_NULL depending on the event identifer. For example when no additional
+**            information available for the event.
+** \return    none
+**
+****************************************************************************************/
+void EventsHook(tEventsId id, void const *info)
+{
+  blt_addr         base_addr;
+  blt_int32u       num_bytes;
+  blt_int8u        progress;
+  blt_char const * filename;
+  tEventsErrorId   error_id;
+  static blt_bool  update_from_file = BLT_FALSE;
+
+  /* Filter on the events identifier. */
+  switch (id)
+  {
+    /* Event EVENT_ID_ON_ENTRY triggers once after a power-on or reset event, when the
+     * bootloader finished it's initialization.
+     */
+    case EVENT_ID_ON_ENTRY:
+      break;
+
+    /* Event EVENT_ID_ON_START triggers at the start of a firmware update. Info
+     * parameter:
+     *  filename: The filename for the firmware updates. Only applicable for firmware
+     *            updates from a locally attached FAT filesystem (e.g. SD-card). For
+     *            firmware updates via a communication interface (e.g. RS232, CAN, etc.)
+     *            the parameter value is BLT_NULL.
+     */
+    case EVENT_ID_ON_START:
+      update_from_file = BLT_FALSE;
+      filename = ((tEventsInfoStart const *)info)->filename;
+      if (filename != BLT_NULL)
+      {
+        update_from_file = BLT_TRUE;
+      }
+      break;
+
+    /* Event EVENT_ID_ON_ERASE triggers each time when a part of non-volatile memory is
+     * about to be erase. Info parameters:
+     *   base_addr: The start memory address of the erase operation.
+     *   num_bytes: The number of bytes that are to be erased, starting at base_addr.
+     */
+    case EVENT_ID_ON_ERASE:
+      base_addr = ((tEventsInfoErase const *)info)->base_addr;
+      num_bytes = ((tEventsInfoErase const *)info)->num_bytes;
+      break;
+
+    /* Event EVENT_ID_ON_WRITE triggers each time when a part of non-volatile memory is
+     * about to be programmed. Info parameters:
+     *   base_addr: The start memory address of the program operation.
+     *   num_bytes: The number of bytes that are to be programmed, starting at base_addr.
+     *   progress:  Overall firmware update progress as a percentage (0..100).
+     */
+    case EVENT_ID_ON_WRITE:
+      base_addr = ((tEventsInfoWrite const *)info)->base_addr;
+      num_bytes = ((tEventsInfoWrite const *)info)->num_bytes;
+      progress  = ((tEventsInfoWrite const *)info)->progress;
+      break;
+
+    /* Event EVENT_ID_ON_SUCCESS triggers after the firmware update successfully
+     * completed.
+     */
+    case EVENT_ID_ON_SUCCESS:
+      break;
+
+    /* Event EVENT_ID_ON_ERROR triggers upon detection of an error during the firmware
+     * update. Info parameter:
+     *  error_id: The error identifier. Refer to tEventsErrorId for a list of available
+     *            error identifiers (EVENT_ERROR_ID_xxx) and their meaning.
+     */
+    case EVENT_ID_ON_ERROR:
+      error_id = ((tEventsInfoError const *)info)->error_id;
+      break;
+
+
+    /* Event EVENT_ID_ON_SUPPRESS triggers when the bootloader intended to start the
+     * user program, yet decided against it. This can for example happen when the
+     * checksum verification failed or the logic in CpuUserProgramStartHook() requested
+     * the bootloader to stay active.
+     */
+    case EVENT_ID_ON_SUPPRESS:
+      break;
+
+    /* Event EVENT_ID_ON_EXIT triggers when the bootloader is about to hand over control
+     * to the user program by starting it.
+     */
+    case EVENT_ID_ON_EXIT:
+      break;
+
+    default:
+      break;  
+  }
+} /*** end of EventsHook ***/
+#endif /* BOOT_EVENTS_ENABLE > 0 */
+
+
+/****************************************************************************************
 *   S E E D / K E Y   S E C U R I T Y   H O O K   F U N C T I O N S
 ****************************************************************************************/
 

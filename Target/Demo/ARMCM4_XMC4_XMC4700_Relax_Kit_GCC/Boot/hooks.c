@@ -32,7 +32,7 @@
 #include "boot.h"                                /* bootloader generic header          */
 #include "led.h"                                 /* LED driver header                  */
 #include "xmc_gpio.h"                            /* GPIO module                        */
-#include <stdio.h>                               /* C library standard I/O             */
+#include "printf.h"                              /* Tiny sprintf                       */
 
 
 /****************************************************************************************
@@ -413,7 +413,7 @@ void EventsHook(tEventsId id, void const *info)
       /* Write event related information to the log file. */
       base_addr = ((tEventsInfoErase const *)info)->base_addr;
       num_bytes = ((tEventsInfoErase const *)info)->num_bytes;
-      sprintf(logStr, "Erasing %lu bytes from %08Xh.\n",
+      sprintf(logStr, "Erasing %lu bytes from %08Xh\n",
               (unsigned long)num_bytes, (unsigned int)base_addr);
       if (logFile.canUse == BLT_TRUE)
       {

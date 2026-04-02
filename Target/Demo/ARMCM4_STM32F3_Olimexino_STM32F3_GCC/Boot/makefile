@@ -125,7 +125,7 @@ STDFLAGS   += -fdata-sections -ffunction-sections -Wall -g3
 OPTFLAGS    = -Og
 DEPFLAGS    = -MT $@ -MMD -MP -MF $(OBJ_PATH)/$*.d
 CFLAGS      = $(STDFLAGS) $(OPTFLAGS)
-CFLAGS     += -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F303xC
+CFLAGS     += -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F303xC -DPRINTF_INCLUDE_CONFIG_H
 CFLAGS     += -D__weak="__attribute__((weak))" -D__packed="__attribute__((__packed__))"
 CFLAGS     += $(INC_PATH)
 AFLAGS      = $(CFLAGS)

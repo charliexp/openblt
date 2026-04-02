@@ -13,7 +13,7 @@ SEGMENTS  /* Here all RAM/ROM areas of the device are listed. Used in PLACEMENT 
       DFLASH        = READ_ONLY     0x0400 TO   0x13FF;
 
 /* non-paged FLASHs */
-      ROM_E800      = READ_ONLY     0xE800 TO   0xFEFF; /* Place bootloader in last 6kb */
+      ROM_E000      = READ_ONLY     0xE000 TO   0xFEFF; /* Place bootloader in last 8kb */
 
 END
 
@@ -28,7 +28,7 @@ PLACEMENT /* here all predefined and user segments are placed into the SEGMENTS 
                               /* in case you want to use ROM_4000 here as well, make sure
                                  that all files (incl. library files) are compiled with the
                                  option: -OnB=b */
-                        INTO  ROM_E800;
+                        INTO  ROM_E000;
 
       SSTACK,                 /* allocate stack first to avoid overwriting variables on overflow */
     DEFAULT_RAM         INTO  RAM;
