@@ -203,6 +203,7 @@ void FileTask(void)
      */
     eventsInfoStart.type = EVENT_START_TYPE_NORMAL;
     eventsInfoStart.filename = FileGetFirmwareFilenameHook();
+    eventsInfoStart.node_id = 0;
     EventsProcess(EVENT_ID_ON_START, &eventsInfoStart);
 #endif
     /* attempt to obtain a file object for the firmware file */

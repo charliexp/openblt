@@ -255,10 +255,13 @@
 /****************************************************************************************
 * Function prototypes
 ****************************************************************************************/
-void     XcpInit(void);
-blt_bool XcpIsConnected(void);
-void     XcpPacketTransmitted(void);
-void     XcpPacketReceived(blt_int8u *data, blt_int8u len);
+void       XcpInit(void);
+blt_bool   XcpIsConnected(void);
+void       XcpPacketTransmitted(void);
+void       XcpPacketReceived(blt_int8u *data, blt_int8u len);
+/* general utility functions */
+blt_int32u XcpGetOrderedLong(blt_int8u const * data);
+void       XcpSetOrderedLong(blt_int32u value, blt_int8u *data);
 
 
 /****************************************************************************************

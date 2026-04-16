@@ -65,10 +65,8 @@ static blt_int8u XcpVerifyKey(blt_int8u resource, blt_int8u *key, blt_int8u len)
 #endif
 
 /* general utility functions */
-static void       XcpProtectResources(void);
-static void       XcpSetCtoError(blt_int8u cmd, blt_int8u error);
-static blt_int32u XcpGetOrderedLong(blt_int8u const * data);
-static void       XcpSetOrderedLong(blt_int32u value, blt_int8u *data);
+static void XcpProtectResources(void);
+static void XcpSetCtoError(blt_int8u cmd, blt_int8u error);
 
 /* XCP command processors */
 static void XcpCmdConnect(blt_int8u *data);
@@ -500,7 +498,7 @@ static void XcpSetCtoError(blt_int8u cmd, blt_int8u error)
 ** \return    The 32-bit value.
 **
 ****************************************************************************************/
-static blt_int32u XcpGetOrderedLong(blt_int8u const * data)
+blt_int32u XcpGetOrderedLong(blt_int8u const * data)
 {
   blt_int32u result = 0;
 
@@ -527,7 +525,7 @@ static blt_int32u XcpGetOrderedLong(blt_int8u const * data)
 ** \param     data Array to the buffer for storage.
 **
 ****************************************************************************************/
-static void XcpSetOrderedLong(blt_int32u value, blt_int8u *data)
+void XcpSetOrderedLong(blt_int32u value, blt_int8u *data)
 {
 #if (BOOT_CPU_BYTE_ORDER_MOTOROLA	== 0)
   data[0] = (blt_int8u) value;
@@ -1341,6 +1339,7 @@ static void XcpCmdProgramStart(blt_int8u *data)
    */
   eventsInfoStart.type = EVENT_START_TYPE_NORMAL;
   eventsInfoStart.filename = BLT_NULL;
+  eventsInfoStart.node_id = 0;
   EventsProcess(EVENT_ID_ON_START, &eventsInfoStart);
 #endif
 } /*** end of XcpCmdProgramStart ***/

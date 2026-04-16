@@ -74,6 +74,7 @@ typedef enum
 typedef struct
 {
   tEventsStartType type;               /**< Firmware update type.                      */
+  blt_int8u        node_id;            /**< Node ID. Only applicable with gateway.     */             
   const blt_char * filename;           /**< Firmware filename (update from FatFS only) */
 } tEventsInfoStart;
 
