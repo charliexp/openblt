@@ -57,8 +57,10 @@ static const XMC_USIC_CH_t *mbrtuChannelMap[] =
 {
   XMC_UART0_CH0, /* BOOT_COM_MBRTU_CHANNEL_INDEX = 0 */
   XMC_UART0_CH1, /* BOOT_COM_MBRTU_CHANNEL_INDEX = 1 */
+#if defined(USIC1)
   XMC_UART1_CH0, /* BOOT_COM_MBRTU_CHANNEL_INDEX = 2 */
   XMC_UART1_CH1  /* BOOT_COM_MBRTU_CHANNEL_INDEX = 3 */
+#endif  
 };
 
 
