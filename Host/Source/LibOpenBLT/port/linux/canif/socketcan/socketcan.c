@@ -625,7 +625,6 @@ static void SocketCanStopEventThread(void)
 ****************************************************************************************/
 static void *SocketCanEventThread(void *param)
 {
-  /* TODO ##Vg Update this for CAN FD support. */
   bool terminateRequest = false;
   struct canfd_frame canRxFrame;
   tCanMsg rxMsg;
