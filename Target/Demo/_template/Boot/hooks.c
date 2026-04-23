@@ -372,7 +372,7 @@ void EventsHook(tEventsId id, void const *info)
   switch (id)
   {
     /* Event EVENT_ID_ON_ENTRY triggers once after a power-on or reset event, when the
-     * bootloader finished it's initialization.
+     * bootloader finished its initialization.
      */
     case EVENT_ID_ON_ENTRY:
       break;
