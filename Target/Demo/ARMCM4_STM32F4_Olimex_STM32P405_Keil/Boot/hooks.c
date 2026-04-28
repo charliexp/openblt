@@ -412,12 +412,14 @@ void EventsHook(tEventsId id, void const *info)
   blt_int8u        progress;
   blt_char const * filename;
   tEventsErrorId   error_id;
-  static blt_char logStr[128];                 /* Made static to lower the stack load. */
+  static blt_bool  update_from_file = BLT_FALSE;
+  static blt_char  logStr[128];                /* Made static to lower the stack load. */
 
   /* Filter on the events identifier. */
   switch (id)
   {
     case EVENT_ID_ON_START:
+      update_from_file = BLT_FALSE;
       logFile.canUse = BLT_FALSE;
       filename = ((tEventsInfoStart const *)info)->filename;
       /* Only log the firmware update events when performing a firmware update from the
@@ -425,6 +427,8 @@ void EventsHook(tEventsId id, void const *info)
        */
       if (filename != BLT_NULL)
       {
+        /* Set flag to indicate this is a firmware update from a local file system. */
+        update_from_file = BLT_TRUE;
         /* Create or overwrite the logfile. */
         logFile.canUse = BLT_FALSE;
         if (f_open(&logFile.handle, "/bootlog.txt", FA_CREATE_ALWAYS | FA_WRITE) == FR_OK)
@@ -433,9 +437,9 @@ void EventsHook(tEventsId id, void const *info)
         }
       }
       /* Write event related information to the log file. */
-      sprintf(logStr, "Firmware update started (%s)\n", filename);
       if (logFile.canUse == BLT_TRUE)
       {
+        sprintf(logStr, "Firmware update started (%s)\n", filename);
         if (f_puts(logStr, &logFile.handle) < 0)
         {
           logFile.canUse = BLT_FALSE;
@@ -448,10 +452,10 @@ void EventsHook(tEventsId id, void const *info)
       /* Write event related information to the log file. */
       base_addr = ((tEventsInfoErase const *)info)->base_addr;
       num_bytes = ((tEventsInfoErase const *)info)->num_bytes;
-      sprintf(logStr, "Erasing %lu bytes from %08Xh\n",
-              (unsigned long)num_bytes, (unsigned int)base_addr);
       if (logFile.canUse == BLT_TRUE)
       {
+        sprintf(logStr, "Erasing %lu bytes from %08Xh\n",
+                (unsigned long)num_bytes, (unsigned int)base_addr);
         if (f_puts(logStr, &logFile.handle) < 0)
         {
           logFile.canUse = BLT_FALSE;
@@ -465,10 +469,11 @@ void EventsHook(tEventsId id, void const *info)
       base_addr = ((tEventsInfoWrite const *)info)->base_addr;
       num_bytes = ((tEventsInfoWrite const *)info)->num_bytes;
       progress  = ((tEventsInfoWrite const *)info)->progress;
-      sprintf(logStr, "Programming %3u bytes at %08Xh [%3u%%]\n",
-              (unsigned int)num_bytes, (unsigned int)base_addr, (unsigned int)progress);
       if (logFile.canUse == BLT_TRUE)
       {
+        sprintf(logStr, "Programming %3u bytes at %08Xh [%3u%%]\n",
+                (unsigned int)num_bytes, (unsigned int)base_addr,
+                (unsigned int)progress);
         if (f_puts(logStr, &logFile.handle) < 0)
         {
           logFile.canUse = BLT_FALSE;
@@ -479,9 +484,9 @@ void EventsHook(tEventsId id, void const *info)
 
     case EVENT_ID_ON_SUCCESS:
       /* Write event related information to the log file. */
-      sprintf(logStr, "Successfully updated the firmware\n");
       if (logFile.canUse == BLT_TRUE)
       {
+        sprintf(logStr, "Successfully updated the firmware\n");
         if (f_puts(logStr, &logFile.handle) < 0)
         {
           logFile.canUse = BLT_FALSE;
@@ -494,16 +499,19 @@ void EventsHook(tEventsId id, void const *info)
         f_close(&logFile.handle);
         logFile.canUse = BLT_FALSE;
       }
-      /* Now delete the firmware file from the disk since the update was successful */
-      f_unlink(firmwareFilename);
+      if (update_from_file == BLT_TRUE)
+      {
+        /* Now delete the firmware file from the disk since the update was successful */
+        f_unlink(firmwareFilename);
+      }
       break;
 
     case EVENT_ID_ON_ERROR:
       /* Write event related information to the log file. */
       error_id = ((tEventsInfoError const *)info)->error_id;
-      sprintf(logStr, "Error with id #%u detected. Aborting.\n", error_id);
       if (logFile.canUse == BLT_TRUE)
       {
+        sprintf(logStr, "Error with id #%u detected. Aborting.\n", error_id);
         if (f_puts(logStr, &logFile.handle) < 0)
         {
           logFile.canUse = BLT_FALSE;
