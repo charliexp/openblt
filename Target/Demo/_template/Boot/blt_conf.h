@@ -81,12 +81,32 @@
 #define BOOT_COM_RS232_ENABLE            (1)
 /** \brief Configure the desired communication speed. */
 #define BOOT_COM_RS232_BAUDRATE          (57600)
-/** \brief Configure number of bytes in the target->host data packet. */
-#define BOOT_COM_RS232_TX_MAX_DATA       (129)
-/** \brief Configure number of bytes in the host->target data packet. */
-#define BOOT_COM_RS232_RX_MAX_DATA       (129)
 /** \brief Select the desired UART peripheral as a zero based index. */
 #define BOOT_COM_RS232_CHANNEL_INDEX     (1)
+
+/* The Modbus RTU communication interface is selected by setting the
+ * BOOT_COM_MBRTU_ENABLE configurable to 1. Configurable BOOT_COM_MBRTU_BAUDRATE selects
+ * the communication speed in bits/second. Configurables BOOT_COM_MBRTU_STOPBITS and
+ * BOOT_COM_MBRTU_PARITY configure the number of stopbits and parity type, respectively.
+ * It is common for a microcontroller to have more than 1 UART interface on board. The
+ * zero-based BOOT_COM_MBRTU_CHANNEL_INDEX selects the UART interface. Each Modbus RTU
+ * communication packet contains the node identifier of the sender (source) and the
+ * receiver (destination). Configurable BOOT_COM_MBRTU_NODE_ID configures the node
+ * identifier of this node. Received Modbus RTU communication packets are only processed
+ * when the receiver node identifier matches BOOT_COM_MBRTU_NODE_ID.
+ */
+/** \brief Enable/disable RS485 transport layer. */
+#define BOOT_COM_MBRTU_ENABLE            (0)
+/** \brief Configure the desired communication speed. */
+#define BOOT_COM_MBRTU_BAUDRATE          (57600)
+/** \brief Configure the desired number of stopbits (1 or 2). */
+#define BOOT_COM_MBRTU_STOPBITS          (1)
+/** \brief Configure the desired parity (0 for none, 1 for odd, 2 for even). */
+#define BOOT_COM_MBRTU_PARITY            (2)
+/** \brief Select the desired UART peripheral as a zero based index. */
+#define BOOT_COM_MBRTU_CHANNEL_INDEX     (1)
+/** \brief The 8-bit node identifier of this node. Should be between 1 and 247. */
+#define BOOT_COM_MBRTU_NODE_ID           (1)
 
 /* The CAN communication interface is selected by setting the BOOT_COM_CAN_ENABLE
  * configurable to 1. Configurable BOOT_COM_CAN_BAUDRATE selects the communication speed
@@ -234,6 +254,52 @@
  */
 /** \brief Enable/disable the hook functions for controlling the watchdog. */
 #define BOOT_COP_HOOKS_ENABLE           (1)
+
+
+/****************************************************************************************
+*   I N F O   T A B L E   C O N F I G U R A T I O N
+****************************************************************************************/
+/* An info table is a constant struct that you add to your own firmware at a fixed
+ * location in non-volatile memory. You can decide yourself where and what contents you
+ * add to this table. For example: product type, firmware version, hardware revision,
+ * serial number, etc.
+ * With the configuration macros BOOT_INFO_TABLE_ADDR and BOOT_INFO_TABLE_LEN you
+ * inform the bootloader where in your firmware it can expect the info table and how
+ * long the table is in bytes.
+ * You enable the info table feature by setting BOOT_INFO_TABLE_ENABLE to 1. When
+ * enabled, the info table is extracted from the selected firmware file at the start of
+ * the firmware update, and copied to an internal RAM buffer in the bootloader.
+ * Once present in this internal RAM buffer, the bootloader calls the hook-function
+ * InfoTableCheckHook(). Inside this hook-function, you can compare the contents of the
+ * info table currently programmed in non-volatile memory (if any) to the contents of
+ * the info table that was extracted from the firmware file of the to-be-programmed
+ * firmware. Based on the results of this comparison, you can give a return value
+ * from the hook-function of BLT_TRUE if the firmware update is allowed to proceed or
+ * BLT_FALSE if the firmware update should be aborted.
+ * With the help of this info table feature you can therefore better control which
+ * firmware is allowed to be programmed. This can for example be used to bypass problems
+ * where the firmware file for a different product or incompatible hardware revision
+ * was accidentally selected.
+ * Note that this is a convenience feature and not a security feature. The seed/key
+ * mechanism is better suited as a security feature to control firmware update access
+ * priveleges.
+ */
+/** \brief Enable (1) or disable (0) the info table feature. */
+#define BOOT_INFO_TABLE_ENABLE          (0)
+
+/** \brief Configure the length of your firmware's info table in bytes. */
+#define BOOT_INFO_TABLE_LEN             (12)
+
+/** \brief Configure the fixed location of your firmware's info table. A good location
+ *         would be right after the "boot block". The "boot block" is defined by the
+ *         flash driver as the first FLASH_WRITE_BLOCK_SIZE bytes at the start of the
+ *         user program. 
+ *         This example value is for a microctroller where the flash start at address
+ *         0x08000000, the first 0x4000 (16kb) is reserved for the bootloader, and the
+ *         "boot block" size is configured as 0x200 (512 bytes) in the microcontroller's
+ *         flash driver of its OpenBLT port.
+ */
+#define BOOT_INFO_TABLE_ADDR            (0x08004200)
 
 
 /****************************************************************************************

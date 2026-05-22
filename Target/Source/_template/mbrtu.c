@@ -236,7 +236,7 @@ void MbRtuTransmitPacket(blt_int8u *data, blt_int8u len)
 blt_bool MbRtuReceivePacket(blt_int8u *data, blt_int8u *len)
 {
   blt_bool result = BLT_FALSE;
-  blt_int8u rxByte;
+  blt_int8u rxByte = 0;
   blt_int16u currentTimeTicks;
   blt_int16u deltaTimeTicks;
   blt_int16u checksumCalculated;
