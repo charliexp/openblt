@@ -48,8 +48,14 @@
 /** \brief Configurable to enabled/disable the automatic CAN bus off recovery feature.
  *         Testing shows that it is better to leave this disabled. If no connection
  *         with the target can be made, the PCAN-USB automatically re-initialized anyway.
+ *         If you do have connection problems due to CAN bus off scenarios, consider
+ *         setting this macro to a value of 1, rebuild LibOpenBLT, and see if that
+ *         solves your problem. Note that you can also override this macro's value, by
+ *         passing it as a compiler-flag with a different value.
  */
+#ifndef PCANUSB_BUSOFF_AUTORECOVERY_ENABLE
 #define PCANUSB_BUSOFF_AUTORECOVERY_ENABLE       (0u)
+#endif
 
 
 /***************************************************************************************
