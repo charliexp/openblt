@@ -173,6 +173,15 @@ bool SerialPortOpen(char const* portname, tSerialPortBaudrate baudrate,
 
       /* Control modes - reset databits and parity configuration. */
       options.c_cflag &= ~(CSIZE | PARENB | PARODD);
+      /* Control modes - reset CTS/RTS hardware flow control. Note that macro CRTSCTS is 
+       * defined by default, unless compiling in strict POSIX mode. In that case use the
+       * macros CCTS_OFLOW and CRTS_IFLOW. 
+       */
+      #if defined(CRTSCTS)
+      options.c_cflag &= ~CRTSCTS;
+      #else
+      options.c_cflag &= ~(CCTS_OFLOW | CRTS_IFLOW);
+      #endif
       /* Control modes - set 8 bit chars. */
       options.c_cflag |= (CS8);
       /* Control modes - set stop bits. Default is 1 stop bit. */
@@ -191,7 +200,13 @@ bool SerialPortOpen(char const* portname, tSerialPortBaudrate baudrate,
         options.c_cflag |= (PARENB); /* Even parity for I/O.*/
         options.c_iflag |= (INPCK); /* Enable input parity check. */
       }
-
+#if (SERIALPORT_HARDWARE_FLOWCTRL_ENABLE > 0)
+      #if defined(CRTSCTS)
+      options.c_cflag |= CRTSCTS;
+      #else
+      options.c_cflag |= (CCTS_OFLOW | CRTS_IFLOW);
+      #endif
+#endif
       /* Local modes - clear giving: echoing off, canonical off (no erase with
        * backspace, ^U,...),  no extended functions, no signal chars (^Z,^C).
        */

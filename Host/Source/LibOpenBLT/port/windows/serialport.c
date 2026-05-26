@@ -164,8 +164,13 @@ bool SerialPortOpen(char const* portname, tSerialPortBaudrate baudrate,
       }
       dcbSerialParams.fOutX = FALSE;
       dcbSerialParams.fInX = FALSE;
-      dcbSerialParams.fRtsControl = RTS_CONTROL_DISABLE;
       dcbSerialParams.fDtrControl = DTR_CONTROL_ENABLE;
+      dcbSerialParams.fOutxCtsFlow = FALSE;
+      dcbSerialParams.fRtsControl = RTS_CONTROL_DISABLE;
+#if (SERIALPORT_HARDWARE_FLOWCTRL_ENABLE > 0)
+      dcbSerialParams.fOutxCtsFlow = TRUE;
+      dcbSerialParams.fRtsControl = RTS_CONTROL_HANDSHAKE;
+#endif
       if (!SetCommState(hUart, &dcbSerialParams))
       {
         (void)CloseHandle(hUart);

@@ -38,6 +38,34 @@ extern "C" {
 #endif
 
 /****************************************************************************************
+* Macro definitions
+****************************************************************************************/
+/** \brief   Configurable to enable/disable the CTS/RTS hardware flow control. 
+ *  \details The serial port is most often used nowadays with a USB-to-RS232 type
+ *           adapter. In this scenario, there is no need for CTS/RTS hardware flow
+ *           control. 
+ * 
+ *           A few users have a hardware setup where on the PC they have a virtual COM
+ *           port via Bluetooth BLE and on the microcontroller target a Bluetooth BLE to
+ *           UART adapter. This enables firmware updates via Bluetooth BLE. In this case
+ *           it could be beneficial to enable CTS/RTS hardware flow control.
+ * 
+ *           If you would like to enable CTS/RTS hardware flow control, set this macro
+ *           to a value of 1 and rebuild LibOpenBLT. Note that you can also override this
+ *           macro's value, by passing it as a compiler-flag with a different value.
+ * 
+ *           Since not a lot of users need this feature, it was decided to support this
+ *           functionality with this compile-time configuration. If more users report
+ *           that they want this feature, it could be changed to a run-time configuration
+ *           solution, where you can select to use CTS/RTS hardware flow control 
+ *           directly in the OpenBLT PC tools. 
+ */
+#ifndef SERIALPORT_HARDWARE_FLOWCTRL_ENABLE
+#define SERIALPORT_HARDWARE_FLOWCTRL_ENABLE       (0u)
+#endif
+
+
+/****************************************************************************************
 * Type definitions
 ****************************************************************************************/
 /** \brief Enumeration of the supported baudrates. */
